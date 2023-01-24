@@ -2,8 +2,10 @@
 # Studentnummer: 1821689
 # Project Zuil
 
+
 import datetime
 import random
+import psycopg2
 
 def bericht():
     tekst = input("Uw bericht: ")
@@ -17,21 +19,31 @@ def reiziger():
         naam = "Anoniem"
         return naam
 
-def datum_tijd():
-        localtime = datetime.datetime.now()
-        tijd = localtime.strftime("%d-%m-%Y %H:%M:%S")
-        return tijd
 
-def stations():
+def datum():
+        localtime = datetime.datetime.now()
+        date = localtime.strftime("%Y-%m-%d")
+        return date
+
+def tijd():
+    localtime = datetime.datetime.now()
+    time = localtime.strftime("%H:%M")
+    return time
+
+def station():
     lst = ("Utrecht","Amsterdam","Den Haag")
     item = random.choice(lst)
     return item
 
-def save_data():
-    file = open("myfile.txt", "a")
-    file = file.write(str(reiziger())),file.write(","),file.write(str(bericht())),file.write(","),\
-           file.write(str(datum_tijd())),file.write(","),file.write(stations()),file.write("\n")
-    return file
-    file.close()
+connection_string = "host='localhost' dbname='test1' user='postgres' password='karoen2001'"
+conn = psycopg2.connect(connection_string)
+cursor = conn.cursor()
 
-print(save_data())
+query = """INSERT INTO feedback (bericht,naam,datum,tijd,station_city)
+           VALUES (%s, %s, %s, %s, %s);"""
+data = (bericht(),reiziger(),datum(),tijd(),station())
+
+cursor.execute(query, data)
+
+conn.commit()
+conn.close()
