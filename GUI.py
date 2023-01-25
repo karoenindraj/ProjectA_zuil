@@ -70,7 +70,7 @@ win.title("Stationshalscherm")
 win.geometry("1100x550")
 win.config(bg="#E0E066")
 
-naam = Label(win,text ='Utrecht Centraal', font = ('Helvetica', 30, 'bold'),fg="Navyblue",bg="#E0E066")
+naam = Label(win,text ='Utrecht Centraal', font = ('Britannic Bold', 30, 'bold'),fg="Navyblue",bg="#E0E066")
 naam.grid(row=0,column=0,sticky=E)
 
 
@@ -126,10 +126,10 @@ label12 = tkinter.Label(image=test1)
 label12.image = test1
 label12.place(x=930,y=370)
 
-image3 = Image.open("my-removebg-preview.png")
+image3 = Image.open("my-removebg-preview1.png")
 test2 = ImageTk.PhotoImage(image3)
 label13 = tkinter.Label(image=test2,bg="#E0E066")
 label13.image = test2
-label13.place(x=800,y=-30)
+label13.place(x=840,y=105)
 
 win.mainloop()
